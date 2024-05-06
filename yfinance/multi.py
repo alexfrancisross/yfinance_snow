@@ -17,7 +17,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+# REMOVED DEPENDENCY ON _multitasking library for Snowpark Compatability
 
 from __future__ import print_function
 
@@ -150,8 +150,8 @@ def download(tickers, start=None, end=None, actions=False, threads=True, ignore_
     # download using threads
     if threads:
         if threads is True:
-            threads = min([len(tickers), _multitasking.cpu_count() * 2])
-        _multitasking.set_max_threads(threads)
+            threads = min([len(tickers), 4 * 2])
+        #_multitasking.set_max_threads(threads)
         for i, ticker in enumerate(tickers):
             _download_one_threaded(ticker, period=period, interval=interval,
                                    start=start, end=end, prepost=prepost,
